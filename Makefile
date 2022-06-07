@@ -11,4 +11,9 @@ push_swap: $(OBJ)
 %.o : %.c
 	gcc -c $< -o $@
 clean:
-	rm -r a.out
+	rm -f push_swap
+fclean: clean
+	rm -f $(OBJ)
+re: fclean all
+
+.PHONY: clean fclean re 
