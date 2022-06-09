@@ -20,12 +20,20 @@ int	push_node(t_queue *n_delete, t_queue *n_push)
 
 	if (n_delete->tail == NULL)
 		return (0);
-	newnode = malloc(sizeof(t_node));
 	newnode = n_delete->tail;
 	temp = n_delete->tail->value;
-	n_delete->tail = n_delete->tail->prev;
-	n_delete->tail->next = NULL;
-	free(newnode);
+	if (n_delete->tail == n_delete->head)
+	{
+		n_delete->tail->value = NULL;
+		n_delete->tail = NULL;
+		n_delete->head = NULL;
+	}
+	else
+	{
+		n_delete->tail = n_delete->tail->prev;
+		n_delete->tail->next = NULL;
+		free(newnode);
+	}
 	enqueue(n_push, temp);
 	return (0);
 }

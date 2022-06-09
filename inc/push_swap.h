@@ -16,6 +16,10 @@ typedef struct queue {
 	t_node	*tail;
 }	t_queue;
 
+typedef struct checker {
+	int		number;
+	int		small_num;
+}	t_checker;
 /* push_swap_init */
 int		enqueue(t_queue *q, int value);
 int		dequeue(t_queue *q);
