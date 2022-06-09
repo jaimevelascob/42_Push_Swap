@@ -24,7 +24,7 @@ int	push_node(t_queue *n_delete, t_queue *n_push)
 	temp = n_delete->tail->value;
 	if (n_delete->tail == n_delete->head)
 	{
-		n_delete->tail->value = NULL;
+		n_delete->tail->value = 0;
 		n_delete->tail = NULL;
 		n_delete->head = NULL;
 	}
@@ -32,8 +32,8 @@ int	push_node(t_queue *n_delete, t_queue *n_push)
 	{
 		n_delete->tail = n_delete->tail->prev;
 		n_delete->tail->next = NULL;
-		free(newnode);
 	}
+	free(newnode);
 	enqueue(n_push, temp);
 	return (0);
 }

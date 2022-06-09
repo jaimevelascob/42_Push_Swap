@@ -6,6 +6,12 @@ void	init_queue(t_queue *q)
 	q->tail = NULL;
 }
 
+void	free_list(t_queue *q, t_queue *q2)
+{
+	while (q2->head != NULL)
+		push_node(q2, q);
+}
+
 int	enqueue(t_queue *q, int value)
 {
 	t_node	*newnode;
@@ -51,10 +57,8 @@ int	print_list(t_queue *q)
 	newnode = q->head;
 	while (newnode != NULL)
 	{
-		printf("%d\n", newnode->value);
 		newnode = newnode->next;
-		//dequeue(q);
+		dequeue(q);
 	}
-	free(newnode);
 	return (0);
 }

@@ -1,5 +1,25 @@
 #include "../inc/push_swap.h"
 
+int	checker_num(t_checker *checker, t_queue *q, int num)
+{
+	t_node	*newnode;
+
+	newnode = q->tail;
+	checker->small_num = 0;
+	checker->number = -1;
+	while (newnode != NULL)
+	{
+		checker->number++;
+		if (newnode->value < num)
+		{
+			checker->small_num = 1;
+			return (1);
+		}
+		newnode = newnode->prev;
+	}
+	return (1);
+}
+
 int	check_duplicate_int(t_queue *q, int number)
 {
 	t_node	*newnode;
@@ -11,7 +31,6 @@ int	check_duplicate_int(t_queue *q, int number)
 			return (0);
 		newnode = newnode->next;
 	}
-	free(newnode);
 	return (1);
 }
 
