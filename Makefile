@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LEAKS = -fsanitize=address
 SRC = src/push_swap.c src/push_swap_controls.c src/push_swap_init.c src/push_swap_checkers.c \
-	  src/push_swap_short.c
+	  src/push_swap_short.c src/ft_atoi.c
 OBJ = $(SRC:.c=.o)
 all: push_swap
 

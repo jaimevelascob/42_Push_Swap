@@ -32,9 +32,12 @@ int		push_node(t_queue *n_delete, t_queue *n_push);
 int		shift_up(t_queue *n);
 int		shift_down(t_queue *n);
 /* push_swap_checkers */
-int	checker_num(t_checker *checker, t_queue *q, int num);
+int		checker_num(t_checker *checker, t_queue *q, int num);
 int		check_int(int argc, char **argv, t_queue *q);
 int		check_duplicate_int(t_queue *q, int number);
 /* push_swap_short */
-int	short_list(t_queue *q, t_queue *q2, int middle_number);
+int		short_list(t_queue *q, t_queue *q2, int middle_number);
+void	shif_list(t_queue *q, t_checker checker, int middle_number);
+
+int		ft_atoi(const char *str);
 #endif

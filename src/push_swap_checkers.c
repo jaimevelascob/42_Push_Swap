@@ -42,7 +42,8 @@ int	check_int(int argc, char **argv, t_queue *q)
 	while (argc-- > 1)
 	{
 		z = atoi(argv[argc]);
-		if (z != 0)
+		printf("%d\n", z);
+		if (z != 0) 
 		{
 			if (check_duplicate_int(q, z) == 0)
 				return (0);

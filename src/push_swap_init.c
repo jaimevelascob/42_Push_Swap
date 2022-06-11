@@ -9,7 +9,10 @@ void	init_queue(t_queue *q)
 void	free_list(t_queue *q, t_queue *q2)
 {
 	while (q2->head != NULL)
+	{
+		printf("pa\n");
 		push_node(q2, q);
+	}
 }
 
 int	enqueue(t_queue *q, int value)
