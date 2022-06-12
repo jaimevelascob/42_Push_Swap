@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc -g
 
 CFLAGS = -Wall -Wextra -Werror
 LEAKS = -fsanitize=address

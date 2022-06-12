@@ -34,23 +34,21 @@ int	check_duplicate_int(t_queue *q, int number)
 	return (1);
 }
 
-int	check_int(int argc, char **argv, t_queue *q)
+long	check_int(int argc, char **argv, t_queue *q)
 {
-	int	z;
+	static long	z;
 
-	z = 0;
 	while (argc-- > 1)
 	{
-		z = atoi(argv[argc]);
-		printf("%d\n", z);
-		if (z != 0) 
+		z = ft_atoi(argv[argc]);
+		if (z != 2147483649)
 		{
 			if (check_duplicate_int(q, z) == 0)
-				return (0);
+				return (2147483649);
 			enqueue(q, z);
 		}
 		else
-			return (0);
+			return (2147483649);
 	}
 	return (1);
 }
