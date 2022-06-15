@@ -18,6 +18,7 @@ typedef struct queue {
 
 typedef struct checker {
 	int		number;
+	int		last_number;
 	int		small_num;
 }	t_checker;
 /* push_swap_init */
@@ -32,7 +33,7 @@ int		push_node(t_queue *n_delete, t_queue *n_push);
 int		shift_up(t_queue *n);
 int		shift_down(t_queue *n);
 /* push_swap_checkers */
-int		checker_num(t_checker *checker, t_queue *q, int num);
+int		checker_num(t_checker *checker, t_queue *q, int num, int middle_number);
 long	check_int(int argc, char **argv, t_queue *q);
 int		check_duplicate_int(t_queue *q, int number);
 /* push_swap_short */

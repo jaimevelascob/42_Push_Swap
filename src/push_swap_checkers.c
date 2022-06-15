@@ -1,22 +1,37 @@
 #include "../inc/push_swap.h"
 
-int	checker_num(t_checker *checker, t_queue *q, int num)
+// buscar el numero mas pequeño
+int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 {
 	t_node	*newnode;
+	int array[middle_number];
 
 	newnode = q->tail;
 	checker->small_num = 0;
 	checker->number = -1;
+	checker->last_number = 0;
+	/* conseguir un numero menor que last_number y mayor qe small_num */
 	while (newnode != NULL)
 	{
 		checker->number++;
-		if (newnode->value < num)
+		/* printf("$ %d- %d- %d %d\n", newnode->value, num, checker->last_number, checker->small_num); */
+		if (newnode->value > num && newnode->value < array[checker->last_number])
 		{
-			checker->small_num = 1;
-			return (1);
+			checker->last_number = checker->number;
 		}
+		else if (newnode->value < num) 
+		{
+			/* printf("-> %d %d\n", num, checker->small_num); */
+			checker->last_number = checker->small_num;
+			checker->small_num = checker->number;
+			num = newnode->value;
+			/* printf("-> %d %d\n", num, checker->small_num); */
+		}
+		array[checker->number] = newnode->value;
 		newnode = newnode->prev;
 	}
+
+	checker->number = checker->last_number;
 	return (1);
 }
 
