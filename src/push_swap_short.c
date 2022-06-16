@@ -46,7 +46,7 @@ int	short_list(t_queue *q, t_queue *q2, int middle_number)
 		checker_num(&checker, q, newnode->value, middle_number - 1);
 		/* printf("smal -> %d, last -> %d midle: %d\n", checker.small_num, checker.last_number, middle_number); */
 		/* print_list(q); */
-		if (checker.small_num != 0 && checker.last_number != 0)
+		if (checker.small_num == middle_number -1 ||  checker.small_num != 0  && checker.last_number != 0)
 		{
 			booleano = shift_list(q, q2, checker, middle_number, booleano);
 
@@ -65,9 +65,15 @@ int	short_list(t_queue *q, t_queue *q2, int middle_number)
 			{
 				printf("/> pb\n");
 				push_node(q, q2);
+				if (booleano == 1)
+				{
+					swap(q2);
+					printf("sb\n");
+					booleano = 0;
+				}
 				middle_number--;
 			}
-			else if (checker.last_number == 0 && checker.small_num != middle_number-1)
+			else if (checker.last_number == 0)
 			{
 				printf("-> pb\n");
 				push_node(q, q2);
