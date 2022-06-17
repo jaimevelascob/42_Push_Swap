@@ -34,7 +34,7 @@ int	is_order_list(t_queue *q)
 	return (1);
 }
 
-int	short_list(t_queue *q, t_queue *q2, int middle_number)
+int	short_list(t_queue *q, t_queue *q2, int middle_number, int media)
 {
 	t_checker	checker;
 	t_node		*newnode;
@@ -73,23 +73,11 @@ int	short_list(t_queue *q, t_queue *q2, int middle_number)
 				}
 				middle_number--;
 			}
-			else if (checker.last_number == 0)
+			else
 			{
 				printf("-> pb\n");
 				push_node(q, q2);
 				booleano = 1;
-				middle_number--;
-			}
-			else
-			{
-				printf("pb\n");
-				push_node(q, q2);
-				if (booleano == 1)
-				{
-					swap(q2);
-					printf("sb\n");
-					booleano = 0;
-				}
 				middle_number--;
 			}
 		}

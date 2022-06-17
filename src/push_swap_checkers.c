@@ -49,12 +49,13 @@ int	check_duplicate_int(t_queue *q, int number)
 	return (1);
 }
 
-long	check_int(int argc, char **argv, t_queue *q)
+long	check_int(int argc, char **argv, t_queue *q, int *media)
 {
 	static long	z;
-
+	int	size = argc;
 	while (argc-- > 1)
 	{
+		
 		z = ft_atoi(argv[argc]);
 		if (z != 2147483649)
 		{
@@ -64,6 +65,9 @@ long	check_int(int argc, char **argv, t_queue *q)
 		}
 		else
 			return (2147483649);
+		*media += z;
+		printf("z %d", *media);
 	}
+	*media /= size -1;
 	return (1);
 }
