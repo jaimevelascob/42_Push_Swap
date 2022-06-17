@@ -1,6 +1,34 @@
 #include "../inc/push_swap.h"
 
 // buscar el numero mas pequeño
+
+int	checker_num_big(t_checker *checker, t_queue *q, int media)
+{
+	t_node	*newnode;
+	static int call=1;
+	int i;
+
+	i = 0;
+	checker->min = media;
+	checker->max = media;
+	while (i++ < call)
+	{
+		checker->min -= media / 2;
+		checker->max += media / 2;
+	}
+	newnode = q->tail;
+	/* recalcular media */
+	while (newnode != NULL)
+	{
+		//if (newnode->value > media && checker.media != 0) 
+		if (newnode->value <= checker->max && newnode->value >= 
+				checker->min) 
+			return (call);
+		newnode = newnode->prev;
+	}
+	call++;
+	return (0);
+}
 int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 {
 	t_node	*newnode;
@@ -30,11 +58,33 @@ int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 		array[checker->number] = newnode->value;
 		newnode = newnode->prev;
 	}
-
 	checker->number = checker->last_number;
 	return (1);
 }
 
+int	checker_last_num(t_queue *q, int num, t_checker *checker)
+{
+	t_node *newnode;
+	int position;
+
+	newnode = q->tail;
+	position = -1;
+	checker->last_number = 0;
+	if (newnode == NULL)
+		return -1;
+	while (newnode != NULL)
+	{
+		position++;
+		if (num < newnode->value)
+		{
+			checker->last_number = position;
+			num = newnode->value;
+		}	
+		newnode = newnode->prev;
+	}
+	return (0);
+
+}
 int	check_duplicate_int(t_queue *q, int number)
 {
 	t_node	*newnode;
@@ -66,7 +116,6 @@ long	check_int(int argc, char **argv, t_queue *q, int *media)
 		else
 			return (2147483649);
 		*media += z;
-		printf("z %d", *media);
 	}
 	*media /= size -1;
 	return (1);
