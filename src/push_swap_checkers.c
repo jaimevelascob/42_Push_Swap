@@ -14,13 +14,17 @@ int	checker_num_big(t_checker *checker, t_queue *q, int media)
 	while (newnode != NULL)
 	{
 		//if (newnode->value > media && checker.media != 0) 
-		printf("media :%d\n", media);
-		if (newnode->value <= media) 
+		/* printf("media :%d\n", media); */
+		if (newnode->value <= media)
+		{
+			checker->bool_media = 1;
 			return (media);
+		}
 		newnode = newnode->prev;
 	}
 	call++;
 	media += media / 5;
+	checker->bool_media = 0;
 	return (media);
 }
 int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
@@ -32,22 +36,18 @@ int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 	checker->small_num = 0;
 	checker->number = -1;
 	checker->last_number = 0;
-	/* conseguir un numero menor que last_number y mayor qe small_num */
 	while (newnode != NULL)
 	{
 		checker->number++;
-		/* printf("$ %d- %d- %d %d\n", newnode->value, num, checker->last_number, checker->small_num); */
 		if (newnode->value > num && newnode->value < array[checker->last_number])
 		{
 			checker->last_number = checker->number;
 		}
 		else if (newnode->value < num) 
 		{
-			/* printf("-> %d %d\n", num, checker->small_num); */
 			checker->last_number = checker->small_num;
 			checker->small_num = checker->number;
 			num = newnode->value;
-			/* printf("-> %d %d\n", num, checker->small_num); */
 		}
 		array[checker->number] = newnode->value;
 		newnode = newnode->prev;
@@ -56,29 +56,70 @@ int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 	return (1);
 }
 
-int	checker_last_num(t_queue *q, int num, t_checker *checker)
+int	checker_last_num(t_queue *q, int num, t_checker *checker,int middle_number)
 {
 	t_node *newnode;
-	int position;
+	int array[middle_number];
 
 	newnode = q->tail;
-	position = -1;
+	checker->small_num = 0;
+	checker->number = -1;
 	checker->last_number = 0;
 	if (newnode == NULL)
 		return -1;
 	while (newnode != NULL)
 	{
-		position++;
-		if (num < newnode->value)
+		checker->number++;
+		if (num > newnode->value && newnode->value > array[checker->last_number])
 		{
-			checker->last_number = position;
+			checker->last_number = checker->number;
+		}
+		else if (num < newnode->value)
+		{
+			checker->last_number = checker->small_num;
+			checker->small_num = checker->number;
 			num = newnode->value;
-		}	
+		}
+		array[checker->number] = newnode->value;
 		newnode = newnode->prev;
 	}
 	return (0);
 
 }
+
+void	checker_media_nums(t_queue *q, t_checker *checker, int media)
+{
+	t_node *newnode;
+	int	boolean = 0;
+	int	position = -1;
+
+	newnode = q->tail;
+	while (newnode != NULL)
+	{
+		position++;
+		if (newnode->value < media && boolean == 0)
+		{
+			checker->f_media_number = position;
+			boolean = 1;
+		}
+		newnode = newnode->prev;
+	}
+	newnode = q->head;
+	position = -1;
+	boolean = 0;
+	while (newnode != NULL)
+	{
+		position++;
+		if (newnode->value < media && boolean == 0)
+		{
+			checker->l_media_number = position;
+			boolean = 1;
+		}
+		newnode = newnode->next;
+	}
+}
+
+
 int	check_duplicate_int(t_queue *q, int number)
 {
 	t_node	*newnode;

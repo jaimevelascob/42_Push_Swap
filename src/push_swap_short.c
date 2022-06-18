@@ -16,7 +16,7 @@ void	shift_list(t_queue *q, t_checker checker, int middle_number)
 
 void	shift_list_b(t_queue *q, t_checker checker, int middle_number)
 {
-	if (checker.last_number <= middle_number/2)
+	if (checker.small_num <= middle_number/2)
 	{
 		shift_up(q);
 		printf("rb\n");
@@ -50,44 +50,81 @@ int	short_list_big(t_queue *q, t_queue *q2, int middle_number, int media)
 	static int			booleano;
 	static int			middle_number_b;
 
+	checker.bool_media = 0;
 	while (q->tail != NULL)
 	{
 		newnode = q->tail;
-		media = checker_num_big(&checker, q, media);
-		printf("media -> %d max -> %d min ->%d\n", media, checker.max, checker.min);
+		while (checker.bool_media == 0)
+			media = checker_num_big(&checker, q, media);
+		/* printf("media -> %d %d\n", media, checker.bool_media); */
 		if (newnode->value <= media)
 		{
-			printf("pb\n");
 			/* if (q2->head != NULL && newnode->value <= media) */
 			/* { */
 			/* 	printf("rrb\n"); */
 			/* 	shift_down(q2); */
 			/* } */
 			push_node(q, q2);
+			printf("pb\n");
 			middle_number_b++;
 			middle_number--;
 		}
+		// hacer que no cambie si la media no encontro nada
 		else
 		{
-			/* checker_num(&checker, q, newnode->value, middle_number - 1); */
-			/* shift_list(q, checker, middle_number); */
-			printf("ra\n");
-			shift_up(q);
+			checker_media_nums(q, &checker, media);
+			/* printf("last -> %d, first -> %d\n", checker.l_media_number, checker.f_media_number); */
+			if (checker.l_media_number < checker.f_media_number)
+			{
+				printf("rra\n");
+				shift_down(q);
+			}
+			else
+			{
+				printf("ra\n");
+				shift_up(q);
+			}
+			/* return 0; */
 		}
+		checker.bool_media = 0;
 	}
 	/* return (0); */
+	booleano = 0;
 	while (q2->tail != NULL)
 	{
 		newnode = q2->tail;
-		checker_last_num(q2, newnode->value, &checker);
-		if (checker.last_number != 0)
+		checker_last_num(q2, newnode->value, &checker, middle_number_b);
+		/* printf("las : %d, prev_: %d\n", checker.small_num, checker.last_number); */
+		if (checker.last_number != 0 && checker.small_num != 0)
+		{
 			shift_list_b(q2, checker, middle_number_b);
+		}
 		else
 		{
-			printf("pa\n");
-			push_node(q2, q);
-			middle_number_b--;
-
+			if (checker.small_num == 0 && booleano == 1)
+			{
+				printf("pa\n");
+				push_node(q2, q);
+				printf("sa\n");
+				swap(q);
+				booleano = 0;
+				middle_number_b--;
+			}
+			else if (checker.small_num == 0)
+			{
+				printf("pa\n");
+				push_node(q2, q);
+				middle_number_b--;
+			}
+			else if (checker.last_number == 0 && booleano == 1)
+				shift_list_b(q2, checker, middle_number_b);
+			else if (checker.last_number == 0)
+			{
+				printf("pa\n");
+				push_node(q2, q);
+				booleano = 1;	
+				middle_number_b--;
+			}
 		}
 	}
 	return (0);
