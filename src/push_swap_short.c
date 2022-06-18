@@ -12,8 +12,6 @@ void	shift_list(t_queue *q, t_checker checker, int middle_number)
 		shift_down(q);
 		printf("rra\n");
 	}
-
-
 }
 
 void	shift_list_b(t_queue *q, t_checker checker, int middle_number)
@@ -55,32 +53,29 @@ int	short_list_big(t_queue *q, t_queue *q2, int middle_number, int media)
 	while (q->tail != NULL)
 	{
 		newnode = q->tail;
-		/* checker_num(&checker, q, newnode->value, middle_number - 1); */
-			/* printf("media -> %d max -> %d min ->%d\n", media, checker.max, checker.min); */
-		if (checker_num_big(&checker, q, media) && newnode->value >= checker.min && newnode->value <=checker.max)
+		media = checker_num_big(&checker, q, media);
+		printf("media -> %d max -> %d min ->%d\n", media, checker.max, checker.min);
+		if (newnode->value <= media)
 		{
 			printf("pb\n");
-			if (q2->head != NULL && newnode->value <= media)
-			{
-				printf("rrb\n");
-				shift_down(q2);
-			}
+			/* if (q2->head != NULL && newnode->value <= media) */
+			/* { */
+			/* 	printf("rrb\n"); */
+			/* 	shift_down(q2); */
+			/* } */
 			push_node(q, q2);
 			middle_number_b++;
 			middle_number--;
 		}
 		else
 		{
+			/* checker_num(&checker, q, newnode->value, middle_number - 1); */
+			/* shift_list(q, checker, middle_number); */
 			printf("ra\n");
 			shift_up(q);
-			/* printf("esto es b-----\n"); */
-			/* print_list(q2); */
-			/* printf("esto es b-----\n"); */
-			/* printf("esto es a-----\n"); */
-			/* print_list(q); */
-			/* printf("esto es a-----\n"); */
 		}
 	}
+	/* return (0); */
 	while (q2->tail != NULL)
 	{
 		newnode = q2->tail;

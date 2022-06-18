@@ -9,25 +9,19 @@ int	checker_num_big(t_checker *checker, t_queue *q, int media)
 	int i;
 
 	i = 0;
-	checker->min = media;
-	checker->max = media;
-	while (i++ < call)
-	{
-		checker->min -= media / 2;
-		checker->max += media / 2;
-	}
 	newnode = q->tail;
 	/* recalcular media */
 	while (newnode != NULL)
 	{
 		//if (newnode->value > media && checker.media != 0) 
-		if (newnode->value <= checker->max && newnode->value >= 
-				checker->min) 
-			return (call);
+		printf("media :%d\n", media);
+		if (newnode->value <= media) 
+			return (media);
 		newnode = newnode->prev;
 	}
 	call++;
-	return (0);
+	media += media / 5;
+	return (media);
 }
 int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 {

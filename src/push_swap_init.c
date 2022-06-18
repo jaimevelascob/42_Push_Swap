@@ -62,7 +62,7 @@ int	print_list(t_queue *q)
 	{
 		printf("%d\n", newnode->value);
 		newnode = newnode->next;
-		/* dequeue(q); */
+		dequeue(q);
 	}
 	return (0);
 }
