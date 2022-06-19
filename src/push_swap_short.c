@@ -150,8 +150,10 @@ int	short_list(t_queue *q, t_queue *q2, t_checker *checker)
 			shift_list_a(q, checker);
 		else
 		{
-			if (is_order_list(q) == 1)
+			if (is_order_list(q) == 1 && checker->booleano != 1)
 				return (0);
+			else if (checker->last_number == 0 && checker->small_num != 0 && checker->booleano == 1)
+				shift_list_a(q, checker);
 			else
 				move_stack_a(q, q2, checker);
 		}
