@@ -6,6 +6,15 @@ void	init_queue(t_queue *q)
 	q->tail = NULL;
 }
 
+t_checker	reset_checkers(t_checker *checker)
+{
+	checker->small_num = 0;
+	checker->number = -1;
+	checker->last_number = 0;
+
+	return *checker;
+}
+
 void	free_list(t_queue *q, t_queue *q2)
 {
 	while (q2->head != NULL)
@@ -51,18 +60,4 @@ int	dequeue(t_queue *q)
 		q->tail = NULL;
 	free(tmp);
 	return (result);
-}
-
-int	print_list(t_queue *q)
-{
-	t_node	*newnode;
-
-	newnode = q->head;
-	while (newnode != NULL)
-	{
-		printf("%d\n", newnode->value);
-		newnode = newnode->next;
-		dequeue(q);
-	}
-	return (0);
 }

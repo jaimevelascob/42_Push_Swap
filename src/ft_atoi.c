@@ -1,3 +1,18 @@
+#include "../inc/push_swap.h"
+
+int	check_duplicate_int(t_queue *q, int number)
+{
+	t_node	*newnode;
+
+	newnode = q->head;
+	while (newnode != NULL)
+	{
+		if (newnode->value == number)
+			return (0);
+		newnode = newnode->next;
+	}
+	return (1);
+}
 
 long	ft_atoi(const char *str)
 {

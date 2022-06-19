@@ -1,49 +1,39 @@
 #include "../inc/push_swap.h"
 
-// buscar el numero mas pequeño
-
-int	checker_num_big(t_checker *checker, t_queue *q, int media)
+t_checker	checker_num_big(t_checker *checker, t_queue *q)
 {
 	t_node	*newnode;
-	static int call=1;
-	int i;
 
-	i = 0;
 	newnode = q->tail;
-	/* recalcular media */
 	while (newnode != NULL)
 	{
-		//if (newnode->value > media && checker.media != 0) 
-		/* printf("media :%d\n", media); */
-		if (newnode->value <= media)
+		if (newnode->value <= checker->media)
 		{
 			checker->bool_media = 1;
-			return (media);
+			return *checker;
 		}
 		newnode = newnode->prev;
 	}
-	call++;
-	media += media / 5;
+	checker->media += checker->media / 5;
 	checker->bool_media = 0;
-	return (media);
+	return *checker;
 }
-int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
+
+void	checker_small_numbers(t_checker *checker, t_queue *q, int num)
 {
 	t_node	*newnode;
-	int array[middle_number];
+	int		*array;
 
+	array = malloc(sizeof(int) * checker->middle_number);
 	newnode = q->tail;
-	checker->small_num = 0;
-	checker->number = -1;
-	checker->last_number = 0;
+	*checker = reset_checkers(checker);
 	while (newnode != NULL)
 	{
 		checker->number++;
-		if (newnode->value > num && newnode->value < array[checker->last_number])
-		{
+		if (newnode->value > num
+			&& newnode->value < array[checker->last_number])
 			checker->last_number = checker->number;
-		}
-		else if (newnode->value < num) 
+		else if (newnode->value < num)
 		{
 			checker->last_number = checker->small_num;
 			checker->small_num = checker->number;
@@ -53,27 +43,23 @@ int	checker_num(t_checker *checker, t_queue *q, int num, int middle_number)
 		newnode = newnode->prev;
 	}
 	checker->number = checker->last_number;
-	return (1);
+	free(array);
 }
 
-int	checker_last_num(t_queue *q, int num, t_checker *checker,int middle_number)
+void	checker_bigger_nums(t_queue *q, int num, t_checker *checker)
 {
-	t_node *newnode;
-	int array[middle_number];
+	t_node	*newnode;
+	int		*array;
 
+	array = malloc(sizeof(int) * checker->middle_number_b);
 	newnode = q->tail;
-	checker->small_num = 0;
-	checker->number = -1;
-	checker->last_number = 0;
-	if (newnode == NULL)
-		return -1;
+	*checker = reset_checkers(checker);
 	while (newnode != NULL)
 	{
 		checker->number++;
-		if (num > newnode->value && newnode->value > array[checker->last_number])
-		{
+		if (num > newnode->value
+			&& newnode->value > array[checker->last_number])
 			checker->last_number = checker->number;
-		}
 		else if (num < newnode->value)
 		{
 			checker->last_number = checker->small_num;
@@ -83,64 +69,40 @@ int	checker_last_num(t_queue *q, int num, t_checker *checker,int middle_number)
 		array[checker->number] = newnode->value;
 		newnode = newnode->prev;
 	}
-	return (0);
-
+	free(array);
 }
 
-void	checker_media_nums(t_queue *q, t_checker *checker, int media)
+t_checker	checker_shift(t_queue *q, t_checker *checker)
 {
-	t_node *newnode;
-	int	boolean = 0;
-	int	position = -1;
+	t_node	*newnode;
+	int		boolean;
+	int		position;
 
+	boolean = 0;
+	position = -1;
 	newnode = q->tail;
 	while (newnode != NULL)
 	{
 		position++;
-		if (newnode->value < media && boolean == 0)
+		if (newnode->value < checker->media && boolean == 0)
 		{
 			checker->f_media_number = position;
 			boolean = 1;
 		}
+		else if (newnode->value < checker->media)
+			checker->l_media_number = (checker->middle_number - position) - 1;
 		newnode = newnode->prev;
 	}
-	newnode = q->head;
-	position = -1;
-	boolean = 0;
-	while (newnode != NULL)
-	{
-		position++;
-		if (newnode->value < media && boolean == 0)
-		{
-			checker->l_media_number = position;
-			boolean = 1;
-		}
-		newnode = newnode->next;
-	}
+	return (*checker);
 }
 
-
-int	check_duplicate_int(t_queue *q, int number)
+long	check_int(int argc, char **argv, t_queue *q, t_checker *checker)
 {
-	t_node	*newnode;
+	static long		z;
+	const int		size = argc;
 
-	newnode = q->head;
-	while (newnode != NULL)
-	{
-		if (newnode->value == number)
-			return (0);
-		newnode = newnode->next;
-	}
-	return (1);
-}
-
-long	check_int(int argc, char **argv, t_queue *q, int *media)
-{
-	static long	z;
-	int	size = argc;
 	while (argc-- > 1)
 	{
-		
 		z = ft_atoi(argv[argc]);
 		if (z != 2147483649)
 		{
@@ -150,8 +112,8 @@ long	check_int(int argc, char **argv, t_queue *q, int *media)
 		}
 		else
 			return (2147483649);
-		*media += z;
+		checker->media += z;
 	}
-	*media /= size -1;
+	checker->media /= size -1;
 	return (1);
 }

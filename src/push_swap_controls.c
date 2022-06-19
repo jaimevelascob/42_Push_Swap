@@ -75,3 +75,17 @@ int	shift_down(t_queue *n)
 	enqueue(n, temp);
 	return (0);
 }
+
+int	print_list(t_queue *q)
+{
+	t_node	*newnode;
+
+	newnode = q->head;
+	while (newnode != NULL)
+	{
+		printf("%d\n", newnode->value);
+		newnode = newnode->next;
+		dequeue(q);
+	}
+	return (0);
+}
