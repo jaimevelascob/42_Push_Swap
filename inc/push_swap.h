@@ -17,6 +17,7 @@ typedef struct queue {
 }	t_queue;
 
 typedef struct checker {
+	int		booleano;
 	int		bool_media;
 	int		number;
 	int		max;
@@ -46,6 +47,7 @@ int		checker_last_num(t_queue *q, int num, t_checker *checker, int middle_number
 long	check_int(int argc, char **argv, t_queue *q, int *media);
 int		check_duplicate_int(t_queue *q, int number);
 /* push_swap_short */
+int		move_stack_a(t_queue *q, t_queue *q2, t_checker *checker, int middle_number);
 int		short_list(t_queue *q, t_queue *q2, int middle_number, int media);
 int		short_list_big(t_queue *q, t_queue *q2, int middle_number, int media);
 void	shift_list(t_queue *q, t_checker checker, int middle_number);

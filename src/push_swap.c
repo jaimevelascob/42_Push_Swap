@@ -21,10 +21,12 @@ int	main(int argc, char **argv)
 		return (0);
 	else
 	{
-		/* if (argc > 49) */
+		if (argc > 49 && argc < 250)
 			short_list_big(&s1, &s2, argc - 1, *media/2);
-		/* else */
-		/* 	short_list(&s1, &s2, argc - 1, *media); */
+		if (argc > 250)
+			short_list_big(&s1, &s2, argc - 1, *media/3);
+		else
+			short_list(&s1, &s2, argc - 1, *media);
 		free_list(&s1, &s2);
 	}
 	print_list(&s1);
