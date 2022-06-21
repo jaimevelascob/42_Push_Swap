@@ -10,13 +10,13 @@ t_checker	checker_num_big(t_checker *checker, t_queue *q)
 		if (newnode->value <= checker->media)
 		{
 			checker->bool_media = 1;
-			return *checker;
+			return (*checker);
 		}
 		newnode = newnode->prev;
 	}
 	checker->media += checker->media / 5;
 	checker->bool_media = 0;
-	return *checker;
+	return (*checker);
 }
 
 void	checker_small_numbers(t_checker *checker, t_queue *q, int num)

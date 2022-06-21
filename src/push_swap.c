@@ -1,5 +1,4 @@
 #include "../inc/push_swap.h"
-// hacer que vaya con un 0
 
 int	main(int argc, char **argv)
 {

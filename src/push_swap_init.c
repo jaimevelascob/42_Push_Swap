@@ -11,8 +11,7 @@ t_checker	reset_checkers(t_checker *checker)
 	checker->small_num = 0;
 	checker->number = -1;
 	checker->last_number = 0;
-
-	return *checker;
+	return (*checker);
 }
 
 void	free_list(t_queue *q, t_queue *q2)
