@@ -117,3 +117,26 @@ long	check_int(int argc, char **argv, t_queue *q, t_checker *checker)
 	checker->media /= size -1;
 	return (1);
 }
+
+long	check_int_array(int argc, char **argv, t_queue *q, t_checker *checker)
+{
+	static long		z;
+	const int		size = argc;
+
+	while (argc >= 0)
+	{
+		z = ft_atoi(argv[argc]);
+		if (z != 2147483649)
+		{
+			if (check_duplicate_int(q, z) == 0)
+				return (2147483649);
+			enqueue(q, z);
+		}
+		else
+			return (2147483649);
+		checker->media += z;
+		argc--;
+	}
+	checker->media /= size+1;
+	return (1);
+}

@@ -17,6 +17,7 @@ typedef struct queue {
 }	t_queue;
 
 typedef struct checker {
+	int		size;
 	int		media;
 	int		middle_number;
 	int		middle_number_b;
@@ -27,6 +28,8 @@ typedef struct checker {
 	int		small_num;
 	int		f_media_number;
 	int		l_media_number;
+	int		next;
+	int		pos;
 }	t_checker;
 /* push_swap_init */
 int			enqueue(t_queue *q, int value);
@@ -62,5 +65,10 @@ void		shift_list_b(t_queue *q, t_checker *checker);
 /* ft_validate_nums */
 long		ft_atoi(const char *str);
 int			check_duplicate_int(t_queue *q, int number);
+/* ft_split */
+void		free_array(char **str, t_checker *checker);
+char		**pass_arguments(char **str, t_checker *checker);
+void		next_array(t_checker *checker);
+char		*add_char(char newchar, char *oldstr, int size);
 
 #endif

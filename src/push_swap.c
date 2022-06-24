@@ -5,16 +5,35 @@ int	main(int argc, char **argv)
 	t_queue		s1;
 	t_queue		s2;
 	t_checker	checker;
+	char		**str;
 	long		error_val;
 
 	checker.media = 0;
 	init_queue(&s1);
 	init_queue(&s2);
-	error_val = check_int(argc, argv, &s1, &checker);
+	/* printf("argc %d", argc); */
+	
+	//si es array
+	if (argc == 1)
+		return 0;
+	if (argc == 2)
+	{
+		str = pass_arguments(argv, &checker);
+		/* printf("str %s %d\n", str[0], checker.next); */
+		if (!str)
+			return 0;
+		else
+			error_val = check_int_array(checker.next, str, &s1, &checker);
+		print_list(&s1);
+		free_array(str, &checker);
+		return 0;
+	}
+	// si es lista
+	else
+		error_val = check_int(argc, argv, &s1, &checker);
+	
 	if (error_val == 2147483649)
 		printf("Error\n");
-	else if (argc == 1)
-		return (0);
 	else
 	{
 		checker.middle_number = argc - 1;
