@@ -20,7 +20,6 @@ char	*add_char(char newchar, char *oldstr, int size)
 	return newstr;
 }
 
-
 void	next_array(t_checker *checker)
 {
 	checker->size = 1;
@@ -56,7 +55,6 @@ char	**pass_arguments(char **str, t_checker *checker)
 
 void	free_array(char **str, t_checker *checker)
 {
-
 	int i = 0;
 	while(i <= checker->next)
 	{
@@ -65,3 +63,25 @@ void	free_array(char **str, t_checker *checker)
 	free(str);
 }
 
+long	check_int_array(int argc, char **argv, t_queue *q, t_checker *checker)
+{
+	static long		z;
+	const int		size = argc;
+
+	while (argc >= 0)
+	{
+		z = ft_atoi(argv[argc]);
+		if (z != 2147483649)
+		{
+			if (check_duplicate_int(q, z) == 0)
+				return (2147483649);
+			enqueue(q, z);
+		}
+		else
+			return (2147483649);
+		checker->media += z;
+		argc--;
+	}
+	checker->media /= size + 1;
+	return (1);
+}

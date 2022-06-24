@@ -11,48 +11,71 @@ int	main(int argc, char **argv)
 	checker.media = 0;
 	init_queue(&s1);
 	init_queue(&s2);
-	/* printf("argc %d", argc); */
-	
-	//si es array
-	if (argc == 1)
-		return 0;
-	if (argc == 2)
+	if (argc <= 2)
 	{
 		str = pass_arguments(argv, &checker);
-		/* printf("str %s %d\n", str[0], checker.next); */
 		if (!str)
 			return 0;
 		else
 			error_val = check_int_array(checker.next, str, &s1, &checker);
-		print_list(&s1);
 		free_array(str, &checker);
-		return 0;
+		print_list(&s1);
+		return (0);
+		checker.middle_number = checker.next + 1;
 	}
-	// si es lista
-	else
-		error_val = check_int(argc, argv, &s1, &checker);
-	
-	if (error_val == 2147483649)
-		printf("Error\n");
 	else
 	{
+		error_val = check_int(argc, argv, &s1, &checker);
 		checker.middle_number = argc - 1;
-		if (argc < 5)
-			short_small_list(&s1);
-		else if (argc > 49 && argc < 250)
-		{
-			checker.media = checker.media / 2;
-			short_list_big(&s1, &s2, &checker);
-		}
-		else if (argc > 250)
-		{
-			checker.media = checker.media / 3;
-			short_list_big(&s1, &s2, &checker);
-		}
-		else
-			short_list(&s1, &s2, &checker);
-		free_list(&s1, &s2);
 	}
-	print_list(&s1);
+		printf("adios %ld\n", error_val);
+	if (error_val == 2147483649)
+	{
+		print_list(&s1);
+		printf("Error\n");
+	}
+	else
+		init_media(&checker, &s1, &s2);
 	return (0);
+}
+
+int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
+{
+	char	**str;
+
+	if (argc <= 2)
+	{
+		str = pass_arguments(argv, checker);
+		if (!str)
+			return 0;
+		else
+			checker->error_val = check_int_array(checker->next, str, s1, checker);
+		free_array(str, checker);
+		checker->middle_number = checker->next + 1;
+	}
+	else
+	{
+		checker->error_val = check_int(argc, argv, s1, checker);
+		checker->middle_number = argc - 1;
+	}
+}
+
+void init_media(t_checker *checker, t_queue *s1, t_queue *s2)
+{
+	if (checker->middle_number < 4)
+		short_small_list(s1);
+	else if (checker->middle_number > 49 && checker->middle_number < 250)
+	{
+		checker->media = checker->media / 2;
+		short_list_big(s1, s2, checker);
+	}
+	else if (checker->middle_number > 250)
+	{
+		checker->media = checker->media / 3;
+		short_list_big(s1, s2, checker);
+	}
+	else
+		short_list(s1, s2, checker);
+	free_list(s1, s2);
+	print_list(s1);
 }

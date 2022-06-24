@@ -30,6 +30,7 @@ typedef struct checker {
 	int		l_media_number;
 	int		next;
 	int		pos;
+	long	error_val;
 }	t_checker;
 /* push_swap_init */
 int			enqueue(t_queue *q, int value);
@@ -70,5 +71,8 @@ void		free_array(char **str, t_checker *checker);
 char		**pass_arguments(char **str, t_checker *checker);
 void		next_array(t_checker *checker);
 char		*add_char(char newchar, char *oldstr, int size);
-
+long		check_int_array(int argc, char **argv, t_queue *q, t_checker *checker);
+/* push_swap.c */
+void		init_media(t_checker *checker, t_queue *s1, t_queue *s2);
+int			fill_list(int argc, t_checker *checker, char **argv, t_queue *s1);
 #endif
