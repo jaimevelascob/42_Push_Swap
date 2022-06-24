@@ -6,7 +6,6 @@ int	main(int argc, char **argv)
 	t_queue		s2;
 	t_checker	checker;
 	long		error_val;
-	int			media[0];
 
 	checker.media = 0;
 	init_queue(&s1);
