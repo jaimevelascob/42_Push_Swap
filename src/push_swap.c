@@ -11,8 +11,9 @@ int	main(int argc, char **argv)
 	checker.media = 0;
 	init_queue(&s1);
 	init_queue(&s2);
-	fill_list(argc, &checker, argv, &s1);
-	if (checker.error_val == 2147483649)
+	if (fill_list(argc, &checker, argv, &s1) == 0)
+		return (0);
+	else if (checker.error_val == 2147483649)
 	{
 		print_list(&s1);
 		printf("Error\n");
@@ -42,6 +43,7 @@ int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
 		checker->error_val = check_int(argc, argv, s1, checker);
 		checker->middle_number = argc - 1;
 	}
+	return (1);
 }
 
 void	init_media(t_checker *checker, t_queue *s1, t_queue *s2)

@@ -2,7 +2,8 @@
 
 int	fill_array(char **newstr, char **str, t_checker *checker)
 {
-	while (str[1][checker->pos] <= '9' && str[1][checker->pos] >= '0')
+	while ((str[1][checker->pos] <= '9' && str[1][checker->pos] >= '0')
+		|| (str[1][checker->pos] <= 'z' && str[1][checker->pos] >= 'a'))
 	{
 		checker->space = 0;
 		newstr[checker->next] = add_char(str[1][checker->pos++],
@@ -10,7 +11,9 @@ int	fill_array(char **newstr, char **str, t_checker *checker)
 	}
 	if ((str[1][checker->pos] == ' '
 		&& (str[1][checker->pos + 1] <= '9' && str[1][checker->pos + 1] >= '0'))
-			|| (str[1][checker->pos] == ' ' && str[1][checker->pos + 1] == '-'))
+		|| (str[1][checker->pos] == ' '
+		&& (str[1][checker->pos + 1] <= 'z' && str[1][checker->pos + 1] >= 'a'))
+		|| (str[1][checker->pos] == ' ' && str[1][checker->pos + 1] == '-'))
 	{
 		next_array(checker);
 		checker->negative_number = 1;
