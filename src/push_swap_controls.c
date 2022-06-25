@@ -83,7 +83,6 @@ int	print_list(t_queue *q)
 	newnode = q->head;
 	while (newnode != NULL)
 	{
-		printf("%d\n", newnode->value);
 		newnode = newnode->next;
 		dequeue(q);
 	}

@@ -19,8 +19,6 @@ int	main(int argc, char **argv)
 		else
 			error_val = check_int_array(checker.next, str, &s1, &checker);
 		free_array(str, &checker);
-		print_list(&s1);
-		return (0);
 		checker.middle_number = checker.next + 1;
 	}
 	else
@@ -28,7 +26,6 @@ int	main(int argc, char **argv)
 		error_val = check_int(argc, argv, &s1, &checker);
 		checker.middle_number = argc - 1;
 	}
-		printf("adios %ld\n", error_val);
 	if (error_val == 2147483649)
 	{
 		print_list(&s1);
@@ -47,9 +44,10 @@ int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
 	{
 		str = pass_arguments(argv, checker);
 		if (!str)
-			return 0;
+			return (0);
 		else
-			checker->error_val = check_int_array(checker->next, str, s1, checker);
+			checker->error_val = check_int_array(checker->next,
+					str, s1, checker);
 		free_array(str, checker);
 		checker->middle_number = checker->next + 1;
 	}
@@ -60,7 +58,7 @@ int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
 	}
 }
 
-void init_media(t_checker *checker, t_queue *s1, t_queue *s2)
+void	init_media(t_checker *checker, t_queue *s1, t_queue *s2)
 {
 	if (checker->middle_number < 4)
 		short_small_list(s1);
