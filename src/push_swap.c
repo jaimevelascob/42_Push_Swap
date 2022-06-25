@@ -11,22 +11,8 @@ int	main(int argc, char **argv)
 	checker.media = 0;
 	init_queue(&s1);
 	init_queue(&s2);
-	if (argc <= 2)
-	{
-		str = pass_arguments(argv, &checker);
-		if (!str)
-			return 0;
-		else
-			error_val = check_int_array(checker.next, str, &s1, &checker);
-		free_array(str, &checker);
-		checker.middle_number = checker.next + 1;
-	}
-	else
-	{
-		error_val = check_int(argc, argv, &s1, &checker);
-		checker.middle_number = argc - 1;
-	}
-	if (error_val == 2147483649)
+	fill_list(argc, &checker, argv, &s1);
+	if (checker.error_val == 2147483649)
 	{
 		print_list(&s1);
 		printf("Error\n");
