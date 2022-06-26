@@ -16,6 +16,11 @@ typedef struct queue {
 	t_node	*tail;
 }	t_queue;
 
+typedef struct error {
+	int	space;
+	int	minus;
+} t_error;
+
 typedef struct checker {
 	int		space;
 	int		negative_number;
@@ -81,6 +86,14 @@ void		next_array(t_checker *checker);
 void		init_checkers(t_checker *checker);
 
 /* push_swap.c */
+void		valor_error(t_error *error, int a, int b);
 void		init_media(t_checker *checker, t_queue *s1, t_queue *s2);
+int			check_errors(char *arv);
 int			fill_list(int argc, t_checker *checker, char **argv, t_queue *s1);
+/* push_swap_checkers_error */
+int			is_digit(char c);
+int			is_space(char c);
+int			is_minus(char c);
+int			check_space(t_error *error);
+int			check_minus(t_error *error);
 #endif

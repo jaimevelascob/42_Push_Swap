@@ -11,8 +11,10 @@ int	main(int argc, char **argv)
 	checker.media = 0;
 	init_queue(&s1);
 	init_queue(&s2);
-	if (fill_list(argc, &checker, argv, &s1) == 0)
-		return (0);
+	if (!fill_list(argc, &checker, argv, &s1))
+	{
+		printf("Error\n");
+	}
 	else if (checker.error_val == 2147483649)
 	{
 		print_list(&s1);
@@ -23,12 +25,49 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+
+void	valor_error(t_error *error, int a, int b)
+{
+	error->space = a;
+	error->minus = b;
+}
+
+int	check_errors(char *argv)
+{
+	t_error error;
+
+	valor_error(&error, 1, 0);
+	while (*argv)
+	{
+		if (is_digit(*argv))
+			valor_error(&error, 0, 0);
+		else if (is_space(*argv))
+		{
+			if(!check_space(&error))
+				return (0);
+		}
+		else if (is_minus(*argv))
+		{
+			if (!check_minus(&error))
+				return (0);
+		}
+		else
+			return (0);
+		argv++;
+	}
+	if (error.space == 1 || error.minus == 1)
+		return (0);
+	return (1);
+}
+
 int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
 {
 	char	**str;
 
 	if (argc <= 2)
 	{
+		if (!check_errors(argv[1]))
+			return (0);
 		str = pass_arguments(argv, checker);
 		if (!str)
 			return (0);
