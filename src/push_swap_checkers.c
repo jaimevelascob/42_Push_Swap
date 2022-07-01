@@ -99,7 +99,6 @@ t_checker	checker_shift(t_queue *q, t_checker *checker)
 long	check_int(int argc, char **argv, t_queue *q, t_checker *checker)
 {
 	static long		z;
-	const int		size = argc;
 
 	while (argc-- > checker->min)
 	{
@@ -113,8 +112,6 @@ long	check_int(int argc, char **argv, t_queue *q, t_checker *checker)
 		}
 		else
 			return (2147483649);
-		checker->media += z;
 	}
-	checker->media /= size - 1;
 	return (1);
 }
