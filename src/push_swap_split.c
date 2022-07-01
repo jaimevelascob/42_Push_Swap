@@ -64,25 +64,19 @@ void	free_array(char **str, t_checker *checker)
 	free(str);
 }
 
-long	check_int_array(int argc, char **argv, t_queue *q, t_checker *checker)
+void	give_real_valor(t_queue *q)
 {
-	static long		z;
-	const int		size = argc;
+	t_node	*node_value;
+	t_node	*newnode;
 
-	while (argc >= 0)
+	newnode = q->head;
+	node_value = q->tail;
+	while (newnode->next != NULL)
 	{
-		z = ft_atoi(argv[argc]);
-		if (z != 2147483649)
-		{
-			if (check_duplicate_int(q, z) == 0)
-				return (2147483649);
-			enqueue(q, z);
-		}
+		if (node_value->value > newnode->value)
+			node_value->real_val++;
 		else
-			return (2147483649);
-		checker->media += z;
-		argc--;
+			newnode->real_val++;
+		newnode = newnode->next;
 	}
-	checker->media /= size + 1;
-	return (1);
 }

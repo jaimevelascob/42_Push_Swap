@@ -7,6 +7,7 @@
 
 typedef struct node {
 	int			value;
+	int			real_val;
 	struct node	*prev;
 	struct node	*next;
 }	t_node;
@@ -19,10 +20,12 @@ typedef struct queue {
 typedef struct error {
 	int	space;
 	int	minus;
-} t_error;
+}	t_error;
 
 typedef struct checker {
+	int		min;
 	int		space;
+	int		static_size;
 	int		negative_number;
 	int		size;
 	int		media;
@@ -40,7 +43,7 @@ typedef struct checker {
 	long	error_val;
 }	t_checker;
 /* push_swap_init */
-int			enqueue(t_queue *q, int value);
+int			enqueue(t_queue *q, int value, int real_val);
 int			dequeue(t_queue *q);
 void		init_queue(t_queue *q);
 int			print_list(t_queue *q);
@@ -74,11 +77,10 @@ void		shift_list_b(t_queue *q, t_checker *checker);
 long		ft_atoi(const char *str);
 int			check_duplicate_int(t_queue *q, int number);
 /* ft_split */
+void		give_real_valor(t_queue *q);
 int			fill_array(char **newstr, char **str, t_checker *checker);
 void		free_array(char **str, t_checker *checker);
 char		**pass_arguments(char **str, t_checker *checker);
-long		check_int_array(int argc, char **argv,
-				t_queue *q, t_checker *checker);
 /* split_helpers.c */
 char		*add_str(char *newstr, char newchar, t_checker *checker, int size);
 char		*add_char(char newchar, char *oldstr, int size, t_checker *checker);

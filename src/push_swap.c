@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-
 void	valor_error(t_error *error, int a, int b)
 {
 	error->space = a;
@@ -34,7 +33,7 @@ void	valor_error(t_error *error, int a, int b)
 
 int	check_errors(char *argv)
 {
-	t_error error;
+	t_error	error;
 
 	valor_error(&error, 1, 0);
 	while (*argv)
@@ -43,7 +42,7 @@ int	check_errors(char *argv)
 			valor_error(&error, 0, 0);
 		else if (is_space(*argv))
 		{
-			if(!check_space(&error))
+			if (!check_space(&error))
 				return (0);
 		}
 		else if (is_minus(*argv))
@@ -66,19 +65,21 @@ int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
 
 	if (argc <= 2)
 	{
+		checker->min = 0;
 		if (!check_errors(argv[1]))
 			return (0);
 		str = pass_arguments(argv, checker);
 		if (!str)
 			return (0);
 		else
-			checker->error_val = check_int_array(checker->next,
+			checker->error_val = check_int(checker->next + 1,
 					str, s1, checker);
 		free_array(str, checker);
 		checker->middle_number = checker->next + 1;
 	}
 	else
 	{
+		checker->min = 1;
 		checker->error_val = check_int(argc, argv, s1, checker);
 		checker->middle_number = argc - 1;
 	}
@@ -91,12 +92,12 @@ void	init_media(t_checker *checker, t_queue *s1, t_queue *s2)
 		short_small_list(s1);
 	else if (checker->middle_number > 49 && checker->middle_number < 250)
 	{
-		checker->media = checker->media / 2;
+		checker->media = checker->middle_number / 5;
 		short_list_big(s1, s2, checker);
 	}
 	else if (checker->middle_number > 250)
 	{
-		checker->media = checker->media / 3;
+		checker->media = checker->middle_number / 11;
 		short_list_big(s1, s2, checker);
 	}
 	else

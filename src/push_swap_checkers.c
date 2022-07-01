@@ -7,14 +7,14 @@ t_checker	checker_num_big(t_checker *checker, t_queue *q)
 	newnode = q->tail;
 	while (newnode != NULL)
 	{
-		if (newnode->value <= checker->media)
+		if (newnode->real_val <= checker->media)
 		{
 			checker->bool_media = 1;
 			return (*checker);
 		}
 		newnode = newnode->prev;
 	}
-	checker->media += checker->media / 5;
+	checker->media += 20;
 	checker->bool_media = 0;
 	return (*checker);
 }
@@ -57,16 +57,16 @@ void	checker_bigger_nums(t_queue *q, int num, t_checker *checker)
 	while (newnode != NULL)
 	{
 		checker->number++;
-		if (num > newnode->value
-			&& newnode->value > array[checker->last_number])
+		if (num > newnode->real_val
+			&& newnode->real_val > array[checker->last_number])
 			checker->last_number = checker->number;
-		else if (num < newnode->value)
+		else if (num < newnode->real_val)
 		{
 			checker->last_number = checker->small_num;
 			checker->small_num = checker->number;
-			num = newnode->value;
+			num = newnode->real_val;
 		}
-		array[checker->number] = newnode->value;
+		array[checker->number] = newnode->real_val;
 		newnode = newnode->prev;
 	}
 	free(array);
@@ -84,12 +84,12 @@ t_checker	checker_shift(t_queue *q, t_checker *checker)
 	while (newnode != NULL)
 	{
 		position++;
-		if (newnode->value < checker->media && boolean == 0)
+		if (newnode->real_val < checker->media && boolean == 0)
 		{
 			checker->f_media_number = position;
 			boolean = 1;
 		}
-		else if (newnode->value < checker->media)
+		else if (newnode->real_val < checker->media)
 			checker->l_media_number = (checker->middle_number - position) - 1;
 		newnode = newnode->prev;
 	}
@@ -101,14 +101,15 @@ long	check_int(int argc, char **argv, t_queue *q, t_checker *checker)
 	static long		z;
 	const int		size = argc;
 
-	while (argc-- > 1)
+	while (argc-- > checker->min)
 	{
 		z = ft_atoi(argv[argc]);
 		if (z != 2147483649)
 		{
 			if (check_duplicate_int(q, z) == 0)
 				return (2147483649);
-			enqueue(q, z);
+			enqueue(q, z, 1);
+			give_real_valor(q);
 		}
 		else
 			return (2147483649);

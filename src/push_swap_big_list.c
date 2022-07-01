@@ -11,14 +11,14 @@ int	short_list_big(t_queue *q, t_queue *q2, t_checker *checker)
 		newnode = q->tail;
 		while (checker->bool_media == 0)
 			*checker = checker_num_big(checker, q);
-		move_value(q, q2, checker, newnode->value);
+		move_value(q, q2, checker, newnode->real_val);
 		checker->bool_media = 0;
 	}
 	checker->booleano = 0;
 	while (q2->tail != NULL)
 	{
 		newnode = q2->tail;
-		checker_bigger_nums(q2, newnode->value, checker);
+		checker_bigger_nums(q2, newnode->real_val, checker);
 		if (checker->last_number != 0 && checker->small_num != 0)
 			shift_list_b(q2, checker);
 		else
@@ -27,9 +27,9 @@ int	short_list_big(t_queue *q, t_queue *q2, t_checker *checker)
 	return (0);
 }
 
-void	move_value(t_queue *q, t_queue *q2, t_checker *checker, int newnode)
+void	move_value(t_queue *q, t_queue *q2, t_checker *checker, int value)
 {
-	if (newnode <= checker->media)
+	if (value <= checker->media)
 	{
 		push_node(q, q2);
 		printf("pb\n");

@@ -23,7 +23,7 @@ void	free_list(t_queue *q, t_queue *q2)
 	}
 }
 
-int	enqueue(t_queue *q, int value)
+int	enqueue(t_queue *q, int value, int real_val)
 {
 	t_node	*newnode;
 
@@ -31,6 +31,7 @@ int	enqueue(t_queue *q, int value)
 	if (newnode == NULL)
 		return (0);
 	newnode->value = value;
+	newnode->real_val = real_val;
 	newnode->next = NULL;
 	if (q->tail != NULL)
 	{
