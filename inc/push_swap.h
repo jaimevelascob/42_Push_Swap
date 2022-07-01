@@ -78,7 +78,6 @@ long		ft_atoi(const char *str);
 int			check_duplicate_int(t_queue *q, int number);
 /* ft_split */
 void		give_real_valor(t_queue *q);
-int			fill_array(char **newstr, char **str, t_checker *checker);
 void		free_array(char **str, t_checker *checker);
 char		**pass_arguments(char **str, t_checker *checker);
 /* split_helpers.c */

@@ -10,12 +10,8 @@ int	main(int argc, char **argv)
 	checker.media = 0;
 	init_queue(&s1);
 	init_queue(&s2);
-	if (argc <= 2)
-	{
-		if (argc != 1 && !check_errors(argv[1]))
-			printf("Error\n");
+	if (argc == 1)
 		return (0);
-	}
 	if (!fill_list(argc, &checker, argv, &s1))
 		printf("Error\n");
 	else if (checker.error_val == 2147483649)
@@ -66,7 +62,7 @@ int	fill_list(int argc, t_checker *checker, char **argv, t_queue *s1)
 {
 	char	**str;
 
-	if (argc < 2)
+	if (argc <= 2)
 	{
 		checker->min = 0;
 		if (!check_errors(argv[1]))
