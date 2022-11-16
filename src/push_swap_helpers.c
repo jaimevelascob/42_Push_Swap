@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_helpers.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvelasco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 17:10:42 by jvelasco          #+#    #+#             */
+/*   Updated: 2022/11/16 17:24:52 by jvelasco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 void	shift_list_a(t_queue *q, t_checker *checker)
@@ -5,12 +17,12 @@ void	shift_list_a(t_queue *q, t_checker *checker)
 	if (checker->small_num <= checker->middle_number / 2)
 	{
 		shift_up(q);
-		printf("ra\n");
+		ft_printf("ra\n");
 	}
 	else
 	{
 		shift_down(q);
-		printf("rra\n");
+		ft_printf("rra\n");
 	}
 }
 
@@ -19,12 +31,12 @@ void	shift_list_b(t_queue *q, t_checker *checker)
 	if (checker->small_num <= checker->middle_number_b / 2)
 	{
 		shift_up(q);
-		printf("rb\n");
+		ft_printf("rb\n");
 	}
 	else
 	{
 		shift_down(q);
-		printf("rrb\n");
+		ft_printf("rrb\n");
 	}
 }
 

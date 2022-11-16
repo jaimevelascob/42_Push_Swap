@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_short.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvelasco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 17:10:49 by jvelasco          #+#    #+#             */
+/*   Updated: 2022/11/16 17:25:50 by jvelasco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 int	short_small_list(t_queue *q)
@@ -9,12 +21,12 @@ int	short_small_list(t_queue *q)
 		newnode = q->tail;
 		if (newnode->value < newnode->prev->value)
 		{
-			printf("rra\n");
+			ft_printf("rra\n");
 			shift_down(q);
 		}
 		else
 		{
-			printf("sa\n");
+			ft_printf("sa\n");
 			swap(q);
 		}
 	}
@@ -52,18 +64,18 @@ void	move_stack_a(t_queue *q, t_queue *q2, t_checker *checker)
 	if (checker->last_number == 0 && checker->small_num == 1)
 	{
 		swap(q);
-		printf("sa\n");
+		ft_printf("sa\n");
 	}
 	else
 	{
-		printf("pb\n");
+		ft_printf("pb\n");
 		push_node(q, q2);
 		if (checker->last_number == 0 && checker->small_num == 0)
 		{
 			if (checker->booleano == 1)
 			{
 				swap(q2);
-				printf("sb\n");
+				ft_printf("sb\n");
 				checker->booleano = 0;
 			}
 		}

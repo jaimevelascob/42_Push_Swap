@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_split_helpers.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvelasco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 17:10:55 by jvelasco          #+#    #+#             */
+/*   Updated: 2022/11/16 17:10:55 by jvelasco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 char	*add_str(char *newstr, char newchar, t_checker *checker, int size)
@@ -27,9 +39,9 @@ char	*add_char(char newchar, char *oldstr, int size, t_checker *checker)
 		newstr[1] = '\0';
 		return (newstr);
 	}
-	i = 0;
-	while (oldstr[i])
-		newstr[i++] = oldstr[i];
+	i = -1;
+	while (oldstr[++i])
+		newstr[i] = oldstr[i];
 	newstr[i++] = newchar;
 	newstr[i] = '\0';
 	free(oldstr);

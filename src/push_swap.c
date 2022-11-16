@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvelasco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 17:10:15 by jvelasco          #+#    #+#             */
+/*   Updated: 2022/11/16 17:23:23 by jvelasco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 int	main(int argc, char **argv)
@@ -13,11 +25,11 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	if (!fill_list(argc, &checker, argv, &s1))
-		printf("Error\n");
+		ft_printf("Error\n");
 	else if (checker.error_val == 2147483649)
 	{
 		print_list(&s1);
-		printf("Error\n");
+		ft_printf("Error\n");
 	}
 	else
 		init_media(&checker, &s1, &s2);

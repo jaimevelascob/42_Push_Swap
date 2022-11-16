@@ -9,12 +9,14 @@ OBJ = $(SRC:.c=.o)
 all: push_swap
 
 push_swap: $(OBJ)
-	$(CC) $(LEAKS) $(OBJ) -o push_swap
+	cd ./printf/ && make
+	$(CC) $(LEAKS) ./printf/libftprintf.a $(OBJ) -o push_swap
 %.o : %.c
 	gcc -c $< -o $@
 clean:
 	rm -f push_swap
 fclean: clean
+	cd ./printf/ && make fclean
 	rm -f $(OBJ)
 re: fclean all
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_big_list.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvelasco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 17:10:24 by jvelasco          #+#    #+#             */
+/*   Updated: 2022/11/16 17:23:57 by jvelasco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
 
 int	short_list_big(t_queue *q, t_queue *q2, t_checker *checker)
@@ -32,7 +44,7 @@ void	move_value(t_queue *q, t_queue *q2, t_checker *checker, int value)
 	if (value <= checker->media)
 	{
 		push_node(q, q2);
-		printf("pb\n");
+		ft_printf("pb\n");
 		checker->middle_number_b++;
 		checker->middle_number--;
 	}
@@ -41,12 +53,12 @@ void	move_value(t_queue *q, t_queue *q2, t_checker *checker, int value)
 		*checker = checker_shift(q, checker);
 		if (checker->l_media_number < checker->f_media_number)
 		{
-			printf("rra\n");
+			ft_printf("rra\n");
 			shift_down(q);
 		}
 		else
 		{
-			printf("ra\n");
+			ft_printf("ra\n");
 			shift_up(q);
 		}
 	}
@@ -56,16 +68,16 @@ void	push_a(t_queue *q, t_queue *q2, t_checker *checker)
 {
 	if (checker->small_num == 0 && checker->booleano == 1)
 	{
-		printf("pa\n");
+		ft_printf("pa\n");
 		push_node(q2, q);
-		printf("sa\n");
+		ft_printf("sa\n");
 		swap(q);
 		checker->booleano = 0;
 		checker->middle_number_b--;
 	}
 	else if (checker->small_num == 0)
 	{
-		printf("pa\n");
+		ft_printf("pa\n");
 		push_node(q2, q);
 		checker->middle_number_b--;
 	}
@@ -73,7 +85,7 @@ void	push_a(t_queue *q, t_queue *q2, t_checker *checker)
 		shift_list_b(q2, checker);
 	else if (checker->last_number == 0)
 	{
-		printf("pa\n");
+		ft_printf("pa\n");
 		push_node(q2, q);
 		checker->booleano = 1;
 		checker->middle_number_b--;

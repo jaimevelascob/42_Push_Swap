@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jvelasco <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/16 17:10:09 by jvelasco          #+#    #+#             */
+/*   Updated: 2022/11/16 17:42:58 by jvelasco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "stdio.h"
@@ -97,4 +109,6 @@ int			is_space(char c);
 int			is_minus(char c);
 int			check_space(t_error *error);
 int			check_minus(t_error *error);
+/* printf */
+int			ft_printf(const char *str, ...);
 #endif
